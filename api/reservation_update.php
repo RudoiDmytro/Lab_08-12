@@ -26,8 +26,7 @@ if (empty($id)) {
 }
 
 try {
-    // Перевірка на накладання, ЯКЩО дати або кімната змінилися
-    // Важливо виключити поточне бронювання з перевірки!
+    // Перевірка на накладання, якщо дати або кімната змінилися
     if ($start && $end && $room_id) {
         $check_sql = "SELECT COUNT(*) FROM reservations
                       WHERE room_id = :room_id AND id != :id AND NOT (end <= :start OR start >= :end)";
@@ -88,8 +87,7 @@ try {
         echo json_encode([
             'message' => 'Бронювання успішно оновлено.',
             'id' => $id,
-            // Поверніть оновлені дані, якщо потрібно для DayPilot
-            'resource' => (string) ($room_id ?? $input['original_room_id'] ?? null), // Потрібен спосіб дізнатися room_id
+            'resource' => (string) ($room_id ?? $input['original_room_id'] ?? null),
             'start' => $start,
             'end' => $end,
             'text' => htmlspecialchars($name ?? $input['original_name'] ?? ''),
@@ -97,7 +95,6 @@ try {
             'paid' => (int) ($paid ?? $input['original_paid'] ?? 0)
         ]);
     } else {
-        // Можливо, запис з таким ID не знайдено, або дані не змінилися
         echo json_encode(['message' => 'Бронювання не оновлено (можливо, дані не змінилися або ID не знайдено).', 'id' => $id]);
     }
 

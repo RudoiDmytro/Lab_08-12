@@ -1,7 +1,7 @@
 $(document).ready(function () {
   var dp = new DayPilot.Scheduler("dp");
 
-  new DayPilot.Date().firstDayOfMonth(); // Встановлюємо на січень 2017 для відповідності скріншоту
+  new DayPilot.Date().firstDayOfMonth();
   dp.days = dp.startDate.daysInMonth(); // Кількість днів у поточному місяці
   dp.scale = "Day";
   dp.timeHeaders = [
@@ -87,7 +87,7 @@ $(document).ready(function () {
       },
       error: function (xhr) {
         console.error("Помилка завантаження кімнат:", xhr);
-        dp.message("Помилка завантаження кімнат.");
+
       },
     });
   }
@@ -107,7 +107,6 @@ $(document).ready(function () {
       },
       error: function (xhr) {
         console.error("Помилка завантаження бронювань:", xhr);
-        dp.message("Помилка завантаження бронювань.");
       },
     });
     updateCurrentMonthDisplay();
@@ -172,10 +171,9 @@ $(document).ready(function () {
               paid: response.paid !== undefined ? response.paid : params.paid,
             })
           );
-          dp.message(response.message || "Бронювання створено.");
         },
         error: function (xhr) {
-          dp.message(
+          console.error(
             "Помилка створення: " +
               (xhr.responseJSON ? xhr.responseJSON.error : xhr.responseText)
           );
@@ -249,10 +247,9 @@ $(document).ready(function () {
           args.e.data.status = params.status;
           args.e.data.paid = params.paid;
           dp.events.update(args.e);
-          dp.message(response.message || "Бронювання оновлено.");
         },
         error: function (xhr) {
-          dp.message(
+          console.error(
             "Помилка оновлення: " +
               (xhr.responseJSON ? xhr.responseJSON.error : xhr.responseText)
           );
@@ -278,10 +275,9 @@ $(document).ready(function () {
             contentType: "application/json",
             success: function (response) {
               dp.events.remove(args.e);
-              dp.message(response.message || "Бронювання видалено.");
             },
             error: function (xhr) {
-              dp.message(
+              console.error(
                 "Помилка видалення: " +
                   (xhr.responseJSON ? xhr.responseJSON.error : xhr.responseText)
               );
@@ -310,7 +306,7 @@ $(document).ready(function () {
       data: JSON.stringify(params),
       contentType: "application/json",
       success: function (response) {
-        dp.message(response.message || "Бронювання переміщено.");
+        console.log(response.message || "Бронювання переміщено.");
         // Оновлюємо дані на клієнті, якщо сервер повернув їх
         if (response.name) {
           args.e.data.name = response.name;
@@ -321,8 +317,7 @@ $(document).ready(function () {
         dp.events.update(args.e);
       },
       error: function (xhr) {
-        /* ... ваш код ... */
-        dp.message(
+        console.error(
           "Помилка переміщення: " +
             (xhr.responseJSON ? xhr.responseJSON.error : xhr.responseText)
         );
@@ -332,7 +327,6 @@ $(document).ready(function () {
   };
 
   dp.onEventResized = function (args) {
-    /* ... ваш існуючий код, що передає name/status/paid ... */
     const eventData = args.e.data;
     const params = {
       id: eventData.id,
@@ -349,7 +343,7 @@ $(document).ready(function () {
       data: JSON.stringify(params),
       contentType: "application/json",
       success: function (response) {
-        dp.message(response.message || "Тривалість бронювання змінено.");
+        console.log(response.message || "Тривалість бронювання змінено.");
         if (response.name) {
           args.e.data.name = response.name;
           args.e.data.text = response.name;
@@ -358,8 +352,7 @@ $(document).ready(function () {
         dp.events.update(args.e);
       },
       error: function (xhr) {
-        /* ... ваш код ... */
-        dp.message(
+        console.error(
           "Помилка зміни тривалості: " +
             (xhr.responseJSON ? xhr.responseJSON.error : xhr.responseText)
         );
@@ -475,7 +468,7 @@ $(document).ready(function () {
         contentType: "application/json",
         success: function (response) {
           loadResources($("#capacity-filter").val()); // Перезавантажити ресурси
-          dp.message(response.message || "Кімнату додано.");
+          console.log(response.message || "Кімнату додано.");
         },
         error: function (xhr) {
           Swal.fire(

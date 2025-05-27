@@ -3,7 +3,7 @@
   "short_name": "ГотельРезерв",
   "description": "Веб-застосунок для резервування номерів у готелі",
   "lang": "uk-UA",
-  "start_url": "/hotel_reservation/index.php",
+  "start_url": "/hotel_reservation/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#007bff",

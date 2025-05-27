@@ -49,7 +49,7 @@ try {
         // Приклад стилізації за статусом
         switch (strtolower($res['status'])) {
             case 'new':
-                $event_data['barColor'] = '#3c78d8'; // Синій (приклад)
+                $event_data['barColor'] = '#3c78d8'; // Синій
                 break;
             case 'confirmed':
                 $event_data['barColor'] = '#6aa84f'; // Зелений
@@ -71,7 +71,7 @@ try {
 
     echo json_encode($output_events);
 
-} catch (Exception $e) { // Exception, бо DateTime теж може кинути
+} catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['error' => 'Помилка запиту до бази даних бронювань: ' . $e->getMessage()]);
 }

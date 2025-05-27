@@ -1,5 +1,5 @@
 <?php
-require_once 'db_connect.php'; // Підключення до БД
+require_once 'db_connect.php';
 
 header('Content-Type: application/json');
 

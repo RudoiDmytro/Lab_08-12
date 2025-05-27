@@ -1,4 +1,4 @@
-const CACHE_VERSION = "v2"; // Змінюйте при оновленні кешованих файлів
+const CACHE_VERSION = "v2";
 const STATIC_CACHE_NAME = `hotel-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE_NAME = `hotel-dynamic-${CACHE_VERSION}`;
 
@@ -8,10 +8,8 @@ const APP_SHELL_URLS = [
   "/hotel_reservation/manifest.json",
   "/hotel_reservation/css/style.css",
   "/hotel_reservation/offline.html", // Офлайн-сторінка
-  // Ваші іконки (принаймні основні)
   "/hotel_reservation/images/icons/icon-192x192.png",
   "/hotel_reservation/images/icons/icon-512x512.png",
-  // Локальні JS бібліотеки, якщо не CDN. CDN кешуватимемо динамічно.
 ];
 
 // Обмеження розміру динамічного кешу (кількість записів)
@@ -58,14 +56,13 @@ self.addEventListener("activate", (event) => {
       );
     })
   );
-  return self.clients.claim(); // Дозволяє активному SW взяти контроль над сторінками одразу
+  return self.clients.claim();
 });
 
 self.addEventListener("fetch", (event) => {
   const requestUrl = new URL(event.request.url);
 
-  // 1. Стратегія для API GET-запитів (Network first, then Cache)
-  // Перевіряємо, чи URL запиту містить '/api/' і це GET-запит
+  // 1. Стратегія для API GET-запитів
   if (requestUrl.pathname.includes("/api/") && event.request.method === "GET") {
     event.respondWith(
       caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
@@ -142,12 +139,9 @@ self.addEventListener("fetch", (event) => {
           return networkResponse; // Для POST і т.д., або якщо не ok
         })
         .catch(() => {
-          // Якщо це навігаційний запит (на HTML сторінку) і мережа недоступна
           if (event.request.mode === "navigate") {
             return caches.match("/hotel_reservation/offline.html");
           }
-          // Для інших типів запитів (зображення, css, js, які не були в App Shell),
-          // можна повернути стандартну помилку або порожню відповідь.
         });
     })
   );
