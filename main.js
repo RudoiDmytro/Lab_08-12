@@ -21,6 +21,7 @@ $(document).ready(function () {
   dp.rowMinHeight = 40;
 
   dp.eventHeight = 70;
+  dp.allowEventOverlap = false;
 
   let config = {
     urls: {
@@ -74,7 +75,7 @@ $(document).ready(function () {
           return {
             id: room.id.toString(),
             name: DayPilot.Util.escapeHtml(room.name || "Кімната " + room.id),
-            html: roomHtml, 
+            html: roomHtml,
 
             _capacity: parseInt(room.capacity),
             _status: room.status,
@@ -86,7 +87,6 @@ $(document).ready(function () {
       },
       error: function (xhr) {
         console.error("Помилка завантаження кімнат:", xhr);
-
       },
     });
   }
@@ -248,10 +248,15 @@ $(document).ready(function () {
           dp.events.update(args.e);
         },
         error: function (xhr) {
-          console.error(
-            "Помилка оновлення: " +
-              (xhr.responseJSON ? xhr.responseJSON.error : xhr.responseText)
-          );
+          let errorMessage = "Невідома помилка оновлення.";
+          if (xhr.responseJSON && xhr.responseJSON.error) {
+            errorMessage = xhr.responseJSON.error;
+          } else if (xhr.statusText) {
+            errorMessage = xhr.statusText;
+          }
+          Swal.fire("Помилка оновлення", errorMessage, "error");
+
+          loadEvents();
         },
       });
     } else if (isDenied) {
@@ -315,10 +320,14 @@ $(document).ready(function () {
         dp.events.update(args.e);
       },
       error: function (xhr) {
-        console.error(
-          "Помилка переміщення: " +
-            (xhr.responseJSON ? xhr.responseJSON.error : xhr.responseText)
-        );
+        let errorMessage = "Невідома помилка оновлення.";
+        if (xhr.responseJSON && xhr.responseJSON.error) {
+          errorMessage = xhr.responseJSON.error;
+        } else if (xhr.statusText) {
+          errorMessage = xhr.statusText;
+        }
+        Swal.fire("Помилка оновлення", errorMessage, "error");
+
         loadEvents();
       },
     });
