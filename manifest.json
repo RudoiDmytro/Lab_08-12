@@ -1,0 +1,30 @@
+{
+  "name": "Бронювання номерів у готелі",
+  "short_name": "ГотельРезерв",
+  "description": "Веб-застосунок для резервування номерів у готелі",
+  "lang": "uk-UA",
+  "start_url": "/hotel_reservation/index.php",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "images/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

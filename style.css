@@ -1,0 +1,172 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+header {
+  background-color: #f0f0f0;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.inBox {
+  width: 90%;
+  margin: 0 auto;
+}
+
+#logo {
+  margin: 0;
+}
+
+#claim {
+  margin: 5px 0 10px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+hr.hidden {
+  display: none;
+}
+
+main {
+  width: 90%;
+  margin: 20px auto;
+  display: flex;
+}
+
+#nav {
+  width: 200px;
+  padding-right: 20px;
+  border-right: 1px solid #ccc;
+}
+
+#dp {
+  flex-grow: 1;
+}
+
+.clear {
+  clear: both;
+}
+
+footer {
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
+  font-size: 0.8em;
+  color: #777;
+}
+
+.scheduler_default_rowheadercol {
+  font-size: 12px;
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+}
+
+.res-status-cell {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.res-status-indicator {
+  width: 6px;
+  min-width: 6px;
+  height: 25px;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.res-status-indicator.status-dirty {
+  background-color: #e74c3c;
+}
+
+.res-status-indicator.status-cleanup {
+  background-color: #f1c40f;
+}
+
+.res-status-indicator.status-ready {
+  background-color: #2ecc71;
+}
+
+/* ----- Стилі для бронювань ----- */
+.scheduler_default_event_inner {
+  padding: 4px 6px;
+  font-size: 14px;
+  line-height: 1.3;
+  overflow: hidden;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.event-line {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 1px;
+}
+
+.event-guest-name {
+  font-weight: bold;
+}
+
+.event-dates {
+  font-size: 0.9em;
+}
+
+.event-res-status {
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+.event-paid-container {
+  width: calc(100% - 150px);
+  margin-bottom: 1rem;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  margin-top: 2px;
+  position: relative;
+  display: inline-block;
+}
+
+.event-paid-bar {
+  height: 100%;
+  background-color: #777777;
+  border-radius: 4px;
+}
+
+.event-paid-text {
+  font-size: 0.9em;
+  padding: 2px 2px;
+  color: #333;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+  line-height: 8px;
+}
+
+#nav h4 {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-size: 1em;
+  color: #333;
+}
+
+#nav div {
+  margin-bottom: 10px;
+}
+
+#nav label {
+  margin-right: 5px;
+}
+
+#nav select,
+#nav button {
+  padding: 5px;
+  font-size: 0.9em;
+}
