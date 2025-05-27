@@ -138,11 +138,6 @@ self.addEventListener("fetch", (event) => {
           }
           return networkResponse; // Для POST і т.д., або якщо не ok
         })
-        .catch(() => {
-          if (event.request.mode === "navigate") {
-            return caches.match("/hotel_reservation/offline.html");
-          }
-        });
     })
   );
 });
