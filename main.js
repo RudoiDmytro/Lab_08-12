@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var dp = new DayPilot.Scheduler("dp");
+  let dp = new DayPilot.Scheduler("dp");
 
   new DayPilot.Date().firstDayOfMonth();
   dp.days = dp.startDate.daysInMonth(); // Кількість днів у поточному місяці
@@ -22,7 +22,7 @@ $(document).ready(function () {
 
   dp.eventHeight = 70;
 
-  var config = {
+  let config = {
     urls: {
       rooms: "api/rooms_get.php",
       events: "api/reservations_get.php",
@@ -34,7 +34,7 @@ $(document).ready(function () {
   };
 
   function loadResources(capacity) {
-    var url = config.urls.rooms;
+    let url = config.urls.rooms;
     if (capacity && capacity !== "0") {
       url += "?capacity=" + capacity;
     }
@@ -73,10 +73,9 @@ $(document).ready(function () {
 
           return {
             id: room.id.toString(),
-            name: DayPilot.Util.escapeHtml(room.name || "Кімната " + room.id), // 'name' для сортування/фільтрації
-            html: roomHtml, // Головний HTML для відображення в рядку ресурсу
+            name: DayPilot.Util.escapeHtml(room.name || "Кімната " + room.id),
+            html: roomHtml, 
 
-            // Зберігаємо оригінальні дані
             _capacity: parseInt(room.capacity),
             _status: room.status,
           };
@@ -93,7 +92,7 @@ $(document).ready(function () {
   }
 
   function loadEvents() {
-    var params = {
+    let params = {
       start: dp.visibleStart().toString(),
       end: dp.visibleEnd().toString(),
     };
@@ -289,7 +288,6 @@ $(document).ready(function () {
   };
 
   dp.onEventMoved = function (args) {
-    /* ... ваш існуючий код, що передає name/status/paid ... */
     const eventData = args.e.data;
     const params = {
       id: eventData.id,
@@ -417,15 +415,15 @@ $(document).ready(function () {
   }
 
   $("#capacity-filter").on("change", function () {
-    /* ... ваш код ... */ var capacity = $(this).val();
+    let capacity = $(this).val();
     loadResources(capacity);
   });
   $("#add-room-btn").on("click", async function () {
-    /* ... ваш код ... */ const { default: Swal } = await import(
+    const { default: Swal } = await import(
       "https://cdn.jsdelivr.net/npm/sweetalert2@11/src/sweetalert2.js"
     );
     const { value: formValues } = await Swal.fire({
-      /* ... */ title: "Додати нову кімнату",
+      title: "Додати нову кімнату",
       html:
         '<input id="swal-room-name" class="swal2-input" placeholder="Назва кімнати">' +
         '<input id="swal-room-capacity" type="number" class="swal2-input" placeholder="Місткість" min="1">' +
@@ -436,7 +434,6 @@ $(document).ready(function () {
         "</select>",
       focusConfirm: false,
       preConfirm: () => {
-        /* ... */
         return {
           name: document.getElementById("swal-room-name").value,
           capacity: parseInt(
